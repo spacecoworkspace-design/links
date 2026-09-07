@@ -126,7 +126,6 @@
     gap:12px;
     padding:16px 18px;
     border:1px solid var(--rule);
-    border-left:3px solid var(--rule);
     background:var(--surface);
     text-decoration:none;
     color:var(--fg);
@@ -153,17 +152,26 @@
     flex:none;
   }
 
-  .link--menu{ border-left-color:var(--c-menu); }
+  .link--menu{
+    background:color-mix(in srgb, var(--c-menu) 22%, var(--surface));
+    border-color:color-mix(in srgb, var(--c-menu) 45%, var(--surface));
+  }
   .link--menu .link-arrow{ color:var(--c-menu); }
-  .link--menu:hover{ border-color:var(--c-menu); border-left-color:var(--c-menu); }
+  .link--menu:hover{ border-color:var(--c-menu); }
 
-  .link--review{ border-left-color:var(--c-review); }
+  .link--review{
+    background:color-mix(in srgb, var(--c-review) 22%, var(--surface));
+    border-color:color-mix(in srgb, var(--c-review) 45%, var(--surface));
+  }
   .link--review .link-arrow{ color:var(--c-review); }
-  .link--review:hover{ border-color:var(--c-review); border-left-color:var(--c-review); }
+  .link--review:hover{ border-color:var(--c-review); }
 
-  .link--instagram{ border-left-color:var(--c-instagram); }
+  .link--instagram{
+    background:color-mix(in srgb, var(--c-instagram) 22%, var(--surface));
+    border-color:color-mix(in srgb, var(--c-instagram) 45%, var(--surface));
+  }
   .link--instagram .link-arrow{ color:var(--c-instagram); }
-  .link--instagram:hover{ border-color:var(--c-instagram); border-left-color:var(--c-instagram); }
+  .link--instagram:hover{ border-color:var(--c-instagram); }
 
   .link.is-disabled{
     cursor:default;
