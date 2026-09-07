@@ -1,0 +1,321 @@
+<title>SpaceCo Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14120F;
+    --paper:#F7F3EA;
+    --brass:#B8843A;
+    --brass-deep:#8C6425;
+    --graphite:#6B655A;
+
+    --bg: var(--paper);
+    --surface: #FCFAF3;
+    --fg: var(--ink);
+    --muted: var(--graphite);
+    --accent: var(--brass-deep);
+    --rule: rgba(20,18,15,0.14);
+    --bracket: rgba(20,18,15,0.55);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: var(--ink);
+      --surface: #1C1913;
+      --fg: var(--paper);
+      --muted: #ABA192;
+      --accent: #CB9A56;
+      --rule: rgba(247,243,234,0.16);
+      --bracket: rgba(247,243,234,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: var(--ink);
+    --surface: #1C1913;
+    --fg: var(--paper);
+    --muted: #ABA192;
+    --accent: #CB9A56;
+    --rule: rgba(247,243,234,0.16);
+    --bracket: rgba(247,243,234,0.5);
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page{
+    max-width:600px;
+    margin:0 auto;
+    padding:56px 28px 72px;
+  }
+
+  /* ---- crop-mark bracket, echoes the wordmark's viewfinder ---- */
+  .bracket{
+    position:relative;
+    padding:26px 22px;
+  }
+  .bracket::before,
+  .bracket::after,
+  .bracket .c2,
+  .bracket .c3{
+    content:"";
+    position:absolute;
+    width:16px;
+    height:16px;
+    border:2px solid var(--bracket);
+  }
+  .bracket::before{ top:0; left:0; border-right:none; border-bottom:none; }
+  .bracket::after{ bottom:0; right:0; border-left:none; border-top:none; }
+  .bracket .c2{ top:0; right:0; border-left:none; border-bottom:none; }
+  .bracket .c3{ bottom:0; left:0; border-right:none; border-top:none; }
+
+  header.bracket{
+    text-align:left;
+    margin-bottom:44px;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+  h1{
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:700;
+    font-size:clamp(40px,9vw,56px);
+    line-height:.96;
+    margin:0 0 14px;
+    text-wrap:balance;
+  }
+  .tagline{
+    margin:0;
+    max-width:38ch;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.55;
+  }
+
+  section.menu-section{
+    margin-bottom:38px;
+  }
+  section.menu-section:last-of-type{
+    margin-bottom:0;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:8px;
+    margin-bottom:6px;
+  }
+  .section-title{
+    font-family:"Space Grotesk",sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+  .section-note{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    color:var(--muted);
+  }
+
+  ul.items{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  ul.items li{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  ul.items li:last-child{ border-bottom:none; }
+
+  ul.items.items-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:24px;
+  }
+  ul.items.items-grid li:nth-last-child(-n+2){ border-bottom:none; }
+  @media (max-width:420px){
+    ul.items.items-grid{ grid-template-columns:1fr; }
+    ul.items.items-grid li:last-child{ border-bottom:none; }
+  }
+  .item-name{
+    font-size:16px;
+    font-weight:500;
+  }
+  .item-fill{
+    flex:1;
+    border-bottom:1px dotted var(--rule);
+    transform:translateY(-4px);
+  }
+  .item-price{
+    font-family:"IBM Plex Mono",monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:14px;
+    color:var(--accent);
+    white-space:nowrap;
+  }
+
+  .placeholder-callout{
+    margin-top:10px;
+    padding:12px 14px;
+    background:var(--surface);
+    border:1px solid var(--rule);
+    border-left:3px solid var(--accent);
+    font-size:13px;
+    line-height:1.5;
+    color:var(--muted);
+  }
+  .placeholder-callout strong{ color:var(--fg); }
+
+  footer{
+    margin-top:56px;
+  }
+  .qr-wrap{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    flex-wrap:wrap;
+  }
+  .qr-card{
+    background:#F7F3EA;
+    padding:14px;
+    border:1px solid rgba(20,18,15,.18);
+    line-height:0;
+    flex:none;
+  }
+  .qr-card img, .qr-card canvas{ display:block; }
+  .qr-copy .eyebrow{ margin-bottom:8px; }
+  .qr-copy p{
+    margin:0;
+    font-size:13px;
+    color:var(--muted);
+    max-width:32ch;
+  }
+
+  .sitefooter{
+    margin-top:48px;
+    padding-top:18px;
+    border-top:1px solid var(--rule);
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+</style>
+
+<div class="page">
+
+  <header class="bracket">
+    <span class="c2"></span><span class="c3"></span>
+    <p class="eyebrow">SpaceCo Workspace &middot; Sherouk City &middot; Diamond Mall</p>
+    <h1>Menu</h1>
+    <p class="tagline">Coffee that keeps up with the work. Order at the counter — we'll bring it to your desk.</p>
+  </header>
+
+  <main>
+
+    <section class="menu-section">
+      <div class="section-head">
+        <span class="section-title">Coffee</span>
+      </div>
+      <ul class="items">
+        <li><span class="item-name">Nescafe</span><span class="item-fill"></span><span class="item-price">30 LE</span></li>
+        <li><span class="item-name">Espresso</span><span class="item-fill"></span><span class="item-price">40 LE</span></li>
+        <li><span class="item-name">Americano</span><span class="item-fill"></span><span class="item-price">45 LE</span></li>
+        <li><span class="item-name">Double Shot</span><span class="item-fill"></span><span class="item-price">50 LE</span></li>
+        <li><span class="item-name">Any Coffee, with Milk</span><span class="item-fill"></span><span class="item-price">60 LE</span></li>
+      </ul>
+    </section>
+
+    <section class="menu-section">
+      <div class="section-head">
+        <span class="section-title">Herbal &amp; Tea</span>
+      </div>
+      <ul class="items">
+        <li><span class="item-name">Tea</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+        <li><span class="item-name">Green Mint</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+        <li><span class="item-name">Anise</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+      </ul>
+    </section>
+
+    <section class="menu-section">
+      <div class="section-head">
+        <span class="section-title">Cold Drinks &amp; Juices</span>
+      </div>
+      <ul class="items">
+        <li><span class="item-name">Water</span><span class="item-fill"></span><span class="item-price">10 LE</span></li>
+        <li><span class="item-name">Juhayna</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+        <li><span class="item-name">Suntop</span><span class="item-fill"></span><span class="item-price">25 LE</span></li>
+        <li><span class="item-name">Cola</span><span class="item-fill"></span><span class="item-price">30 LE</span></li>
+        <li><span class="item-name">Red Bull</span><span class="item-fill"></span><span class="item-price">75 LE</span></li>
+      </ul>
+    </section>
+
+    <section class="menu-section">
+      <div class="section-head">
+        <span class="section-title">Snacks</span>
+      </div>
+      <ul class="items items-grid">
+        <li><span class="item-name">Big Chips</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+        <li><span class="item-name">Bimbo</span><span class="item-fill"></span><span class="item-price">15 LE</span></li>
+        <li><span class="item-name">Biscrem</span><span class="item-fill"></span><span class="item-price">15 LE</span></li>
+        <li><span class="item-name">Cadbury</span><span class="item-fill"></span><span class="item-price">22 LE</span></li>
+        <li><span class="item-name">Flutes</span><span class="item-fill"></span><span class="item-price">25 LE</span></li>
+        <li><span class="item-name">Freska</span><span class="item-fill"></span><span class="item-price">15 LE</span></li>
+        <li><span class="item-name">Hohos</span><span class="item-fill"></span><span class="item-price">15 LE</span></li>
+        <li><span class="item-name">Kiips</span><span class="item-fill"></span><span class="item-price">17 LE</span></li>
+        <li><span class="item-name">Luxe</span><span class="item-fill"></span><span class="item-price">15 LE</span></li>
+        <li><span class="item-name">MacVities</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+        <li><span class="item-name">Molto</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+        <li><span class="item-name">Oreo</span><span class="item-fill"></span><span class="item-price">19 LE</span></li>
+        <li><span class="item-name">Todo</span><span class="item-fill"></span><span class="item-price">20 LE</span></li>
+        <li><span class="item-name">TUC</span><span class="item-fill"></span><span class="item-price">25 LE</span></li>
+        <li><span class="item-name">Twinkies</span><span class="item-fill"></span><span class="item-price">14 LE</span></li>
+        <li><span class="item-name">Ulker</span><span class="item-fill"></span><span class="item-price">15 LE</span></li>
+        <li><span class="item-name">Windows</span><span class="item-fill"></span><span class="item-price">15 LE</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="qr-wrap bracket">
+      <span class="c2"></span><span class="c3"></span>
+      <div class="qr-card" id="qr"></div>
+      <div class="qr-copy">
+        <p class="eyebrow">Scan to view this menu</p>
+        <p>Point your camera — no app needed. Same link that'll sit in the Linktree.</p>
+      </div>
+    </div>
+    <p class="sitefooter">SpaceCo_Workspace &middot; Sherouk City &middot; Diamond Mall</p>
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  new QRCode(document.getElementById("qr"), {
+    text: window.location.href,
+    width: 148,
+    height: 148,
+    colorDark: "#14120F",
+    colorLight: "#F7F3EA",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
