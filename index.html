@@ -14,6 +14,7 @@
     --brass:#B8843A;
     --brass-deep:#8C6425;
     --graphite:#6B655A;
+    --rust:#A6512D;
 
     --bg: var(--paper);
     --surface: #FCFAF3;
@@ -21,8 +22,11 @@
     --muted: var(--graphite);
     --accent: var(--brass-deep);
     --rule: rgba(20,18,15,0.16);
-    --bracket: rgba(20,18,15,0.55);
     --disabled-fg: rgba(20,18,15,0.38);
+
+    --c-menu: var(--brass);
+    --c-review: var(--graphite);
+    --c-instagram: var(--rust);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -32,8 +36,11 @@
       --muted: #ABA192;
       --accent: #CB9A56;
       --rule: rgba(247,243,234,0.18);
-      --bracket: rgba(247,243,234,0.5);
       --disabled-fg: rgba(247,243,234,0.34);
+
+      --c-menu: #CB9A56;
+      --c-review: #A79F8E;
+      --c-instagram: #C97350;
     }
   }
   :root[data-theme="dark"]{
@@ -43,8 +50,11 @@
     --muted: #ABA192;
     --accent: #CB9A56;
     --rule: rgba(247,243,234,0.18);
-    --bracket: rgba(247,243,234,0.5);
     --disabled-fg: rgba(247,243,234,0.34);
+
+    --c-menu: #CB9A56;
+    --c-review: #A79F8E;
+    --c-instagram: #C97350;
   }
 
   *{ box-sizing:border-box; }
@@ -65,36 +75,32 @@
     padding:52px 24px 40px;
   }
 
-  .bracket{ position:relative; padding:22px 18px; }
-  .bracket::before, .bracket::after, .bracket .c2, .bracket .c3{
-    content:"";
-    position:absolute;
-    width:14px;
-    height:14px;
-    border:2px solid var(--bracket);
-  }
-  .bracket::before{ top:0; left:0; border-right:none; border-bottom:none; }
-  .bracket::after{ bottom:0; right:0; border-left:none; border-top:none; }
-  .bracket .c2{ top:0; right:0; border-left:none; border-bottom:none; }
-  .bracket .c3{ bottom:0; left:0; border-right:none; border-top:none; }
-
   header{
     text-align:center;
     margin-bottom:40px;
   }
-  .mark{
-    font-family:"Space Grotesk",sans-serif;
-    font-weight:700;
-    font-size:30px;
-    letter-spacing:.01em;
-    margin:0 0 6px;
+  .logo-wrap{
+    width:220px;
+    height:84px;
+    overflow:hidden;
+    position:relative;
+    margin:0 auto 14px;
   }
-  .mark .bk{
-    display:inline-block;
-    padding:0 3px;
-    border-top:2px solid var(--fg);
-    border-bottom:2px solid var(--fg);
+  .logo-wrap img{
+    position:absolute;
+    left:0;
+    top:-66px;
+    width:220px;
+    height:220px;
   }
+  .logo-dark{ display:none; }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .logo-light{ display:none; }
+    :root:not([data-theme="light"]) .logo-dark{ display:block; }
+  }
+  :root[data-theme="dark"] .logo-light{ display:none; }
+  :root[data-theme="dark"] .logo-dark{ display:block; }
+
   .eyebrow{
     font-family:"IBM Plex Mono",monospace;
     font-size:10.5px;
@@ -120,12 +126,12 @@
     gap:12px;
     padding:16px 18px;
     border:1px solid var(--rule);
+    border-left:3px solid var(--rule);
     background:var(--surface);
     text-decoration:none;
     color:var(--fg);
     transition:border-color .15s ease, transform .1s ease;
   }
-  .link:hover{ border-color:var(--accent); }
   .link:active{ transform:translateY(1px); }
   .link:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
@@ -144,9 +150,20 @@
   .link-arrow{
     font-family:"IBM Plex Mono",monospace;
     font-size:16px;
-    color:var(--accent);
     flex:none;
   }
+
+  .link--menu{ border-left-color:var(--c-menu); }
+  .link--menu .link-arrow{ color:var(--c-menu); }
+  .link--menu:hover{ border-color:var(--c-menu); border-left-color:var(--c-menu); }
+
+  .link--review{ border-left-color:var(--c-review); }
+  .link--review .link-arrow{ color:var(--c-review); }
+  .link--review:hover{ border-color:var(--c-review); border-left-color:var(--c-review); }
+
+  .link--instagram{ border-left-color:var(--c-instagram); }
+  .link--instagram .link-arrow{ color:var(--c-instagram); }
+  .link--instagram:hover{ border-color:var(--c-instagram); border-left-color:var(--c-instagram); }
 
   .link.is-disabled{
     cursor:default;
@@ -154,9 +171,7 @@
     border-style:dashed;
   }
   .link.is-disabled .link-title{ color:var(--disabled-fg); }
-  .link.is-disabled:hover{ border-color:var(--rule); }
   .link.is-disabled .link-arrow{
-    font-family:"IBM Plex Mono",monospace;
     font-size:10px;
     letter-spacing:.1em;
     color:var(--disabled-fg);
@@ -177,9 +192,11 @@
 
 <div class="page">
 
-  <header class="bracket">
-    <span class="c2"></span><span class="c3"></span>
-    <p class="mark">SPACE<span class="bk">CO</span>.</p>
+  <header>
+    <div class="logo-wrap">
+      <img class="logo-light" src="spaceco-logo-black.png" alt="SpaceCo Workspace" width="220" height="220">
+      <img class="logo-dark" src="spaceco-logo-white.png" alt="SpaceCo Workspace" width="220" height="220">
+    </div>
     <p class="eyebrow">Sherouk City &middot; Diamond Mall</p>
   </header>
 
@@ -195,7 +212,7 @@
     </li>
 
     <li>
-      <a class="link" href="menu.html">
+      <a class="link link--menu" href="menu.html">
         <span class="link-text">
           <span class="link-title">Menu</span>
           <span class="link-sub">Coffee, tea, cold drinks &amp; snacks</span>
@@ -205,9 +222,9 @@
     </li>
 
     <li>
-      <a class="link" href="https://maps.app.goo.gl/XmLYT9PPF36vhHhQ7?g_st=ic" target="_blank" rel="noopener">
+      <a class="link link--review" href="https://maps.app.goo.gl/XmLYT9PPF36vhHhQ7?g_st=ic" target="_blank" rel="noopener">
         <span class="link-text">
-          <span class="link-title">Add Your Review</span>
+          <span class="link-title">Review Us!</span>
           <span class="link-sub">Via Google Maps</span>
         </span>
         <span class="link-arrow">&rarr;</span>
@@ -215,7 +232,7 @@
     </li>
 
     <li>
-      <a class="link" href="https://www.instagram.com/spaceco_workspace/" target="_blank" rel="noopener">
+      <a class="link link--instagram" href="https://www.instagram.com/spaceco_workspace/" target="_blank" rel="noopener">
         <span class="link-text">
           <span class="link-title">Instagram</span>
           <span class="link-sub">@spaceco_workspace</span>
