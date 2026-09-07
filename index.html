@@ -25,8 +25,8 @@
     --disabled-fg: rgba(20,18,15,0.38);
 
     --c-menu: var(--brass);
-    --c-review: var(--graphite);
-    --c-instagram: var(--rust);
+    --c-review: var(--brass);
+    --c-instagram: var(--brass);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -39,8 +39,8 @@
       --disabled-fg: rgba(247,243,234,0.34);
 
       --c-menu: #CB9A56;
-      --c-review: #A79F8E;
-      --c-instagram: #C97350;
+      --c-review: #CB9A56;
+      --c-instagram: #CB9A56;
     }
   }
   :root[data-theme="dark"]{
@@ -53,8 +53,8 @@
     --disabled-fg: rgba(247,243,234,0.34);
 
     --c-menu: #CB9A56;
-    --c-review: #A79F8E;
-    --c-instagram: #C97350;
+    --c-review: #CB9A56;
+    --c-instagram: #CB9A56;
   }
 
   *{ box-sizing:border-box; }
@@ -188,11 +188,15 @@
   footer{
     margin-top:40px;
     text-align:center;
-    font-family:"IBM Plex Mono",monospace;
-    font-size:10.5px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
+    font-family:"Inter",sans-serif;
+    font-size:12.5px;
+    font-style:italic;
+    line-height:1.5;
     color:var(--muted);
+  }
+  footer p{
+    margin:0 auto;
+    max-width:26ch;
   }
 </style>
 </head>
@@ -251,7 +255,7 @@
 
   </ul>
 
-  <footer>SpaceCo_Workspace</footer>
+  <footer><p>Where ideas come to life, and productivity thrives.</p></footer>
 
 </div>
 
